@@ -223,6 +223,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
 #endif
             // set the desired speed to be walking or running
             speed = m_IsWalking ? m_WalkSpeed : m_RunSpeed;
+			speed = m_IsCrouching ? m_WalkSpeed * 0.2f : m_WalkSpeed;
+
             m_Input = new Vector2(horizontal, vertical);
 
             // normalize input if it exceeds 1 in combined length:
@@ -242,8 +244,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
 			if (Input.GetKey (KeyCode.C)) 
 			{
 				m_IsCrouching = true;
-				speed = m_IsCrouching ? m_WalkSpeed * 0.2f : m_WalkSpeed;
-
 			} else {
 				m_IsCrouching = false;
 			}
