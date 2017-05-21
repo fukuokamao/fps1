@@ -10,19 +10,13 @@ public class GunController : MonoBehaviour {
 
 	void Start (){
 		audioSource = GetComponent<AudioSource>();
-
 	}
 
 	// 銃口に火をつける
 	void Fire(){
-		GameObject obj =
-		Instantiate (
-			Sparkle,
-			transform.position,
-			Quaternion.identity
-		);
-
-		Destroy (obj,0.2f);
+		GameObject fire =
+		Instantiate (Sparkle,transform.position,Quaternion.identity);
+		Destroy (fire,0.2f);
 	}
 
 
@@ -41,12 +35,7 @@ public class GunController : MonoBehaviour {
 			if (Physics.Raycast (ray, out hit)) 
 			{
 				//銃弾が当たった所で火をつける
-				GameObject bullet =
-					Instantiate(
-						Sparkle,
-						hit.point,
-						Quaternion.identity
-					);
+				GameObject bullet = Instantiate(Sparkle,hit.point,Quaternion.identity);
 				Destroy(bullet,0.2f);
 			}
 		}
