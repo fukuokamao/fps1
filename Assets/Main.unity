@@ -5573,8 +5573,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4e2289b547fa4e01bb7002179df4e9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Sparkle: {fileID: 0}
-  Shotgun: {fileID: 0}
+  Sparkle: {fileID: 1248459231179102, guid: 282fd98489e57461d85db9cc29a11a06, type: 2}
+  shotgun: {fileID: 8300000, guid: 8602b7d5cd15c1943a50aa53f171c8cf, type: 3}
+  reload: {fileID: 8300000, guid: 3c5c1d4d7b9307c458890a4beb12e4ae, type: 3}
   text:
   - {fileID: 721060640}
   - {fileID: 1703875733}
@@ -11522,7 +11523,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'BulletBox : '
+  m_Text: 
 --- !u!222 &721060641
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -25796,7 +25797,7 @@ Transform:
   m_PrefabParentObject: {fileID: 400192, guid: 70bd327581f110b4a936db6df5f9ed54, type: 3}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1622421762}
-  m_LocalRotation: {x: 0.6122277, y: -0.36693397, z: -0.5988898, w: -0.36313614}
+  m_LocalRotation: {x: 0.6122276, y: -0.36693394, z: -0.59888977, w: -0.3631361}
   m_LocalPosition: {x: -6.393426, y: 1.3832966, z: 2.7329824}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -27603,7 +27604,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Bullet:'
+  m_Text: 
 --- !u!222 &1703875734
 CanvasRenderer:
   m_ObjectHideFlags: 0
