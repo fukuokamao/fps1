@@ -18,7 +18,7 @@ public class EnemyController : MonoBehaviour {
 		if (life == 0) 
 		{
 			FallAnimation ();
-			Invoke("StandAnimation",1);
+			Invoke("StandAnimation",10);
 			life = 5;
 		}
 	}
