@@ -14,6 +14,7 @@ public class GunController : MonoBehaviour {
 	int bulletbox = 150;
 	public int hitpoint;
 	public GameObject headmaker;
+	float cooltime = 0;
 
 	void Start (){
 		audioSource = GetComponent<AudioSource>();
@@ -23,45 +24,47 @@ public class GunController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update (){
-		if(Input.GetMouseButtonDown(0) && bullet > 0 )
+		if (Input.GetMouseButtonDown (0) && bullet > 0) 
 		{	
-			// 銃口に火をつける
-			Fire();
+		cooltime += Time.deltaTime;
+			if (cooltime >= 0.2f) {
+				// 銃口に火をつける
+				Fire ();
 
-			//弾数を減らす
-			Shot();
+				//弾数を減らす
+				Shot ();
 
-			// 発射音を鳴らす
-			audioSource.PlayOneShot(shotgun,0.5f);
+				// 発射音を鳴らす
+				audioSource.PlayOneShot (shotgun, 0.5f);
 
-			Ray ray = new Ray(transform.position, transform.forward);
-			RaycastHit hit;
+				Ray ray = new Ray (transform.position, transform.forward);
+				RaycastHit hit;
 
-			if (Physics.Raycast (ray, out hit)) 
-			{
-				//銃弾が当たった所で火をつける
-				GameObject bullet = Instantiate(sparkle,(hit.point-(transform.forward/5)),Quaternion.identity);
-				Destroy(bullet,0.2f);
+				if (Physics.Raycast (ray, out hit)) {
+					//銃弾が当たった所で火をつける
+					GameObject bullet = Instantiate (sparkle, (hit.point - (transform.forward / 5)), Quaternion.identity);
+					Destroy (bullet, 0.2f);
 
-				EnemyController enemyCon = hit.collider.gameObject.transform.parent.GetComponent<EnemyController> ();
-				if(enemyCon != null)
-				{
-					//EnemyのHPが減る
-					enemyCon.Damage ();
+					EnemyController enemyCon = hit.collider.gameObject.transform.parent.GetComponent<EnemyController> ();
+					if (enemyCon != null) {
+						//EnemyのHPが減る
+						enemyCon.Damage ();
 
-					float distance = Vector3.Distance (headmaker.transform.position,hit.point);
+						float distance = Vector3.Distance (headmaker.transform.position, hit.point);
 
-					if (distance < 0.1f) {
-						hitpoint = 100;
-						print (hitpoint);
-					} else if (distance > 0.7f) {
-						hitpoint = 30;
-						print (hitpoint);
-					} else {
-						hitpoint = 50;
-						print (hitpoint);
+						if (distance < 0.1f) {
+							hitpoint = 100;
+							print (hitpoint);
+						} else if (distance > 0.7f) {
+							hitpoint = 30;
+							print (hitpoint);
+						} else {
+							hitpoint = 50;
+							print (hitpoint);
+						}
 					}
 				}
+				cooltime = 0;
 			}
 		}
 
