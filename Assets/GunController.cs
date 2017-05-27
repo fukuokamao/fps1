@@ -20,11 +20,16 @@ public class GunController : MonoBehaviour {
 	int sum = 0;
 	public GameObject reticle;
 	float gametime = 20;
+	public GameObject Snipe;
+	Camera camera;
+	public GameObject firstPersonCharacter;
+	bool isSnipe;
 
 	void Start (){
 		audioSource = GetComponent<AudioSource>();
 		shotbullet [0].text = "BulletBox : " + bulletbox;
 		shotbullet [1].text = "Bullet : " + bullet + "/30";
+		camera = firstPersonCharacter.GetComponent<Camera> ();
 	}
 
 	// Update is called once per frame
@@ -37,8 +42,6 @@ public class GunController : MonoBehaviour {
 
 		if (Input.GetMouseButtonDown (0) && bullet > 0) 
 		{	
-			//レティクルを表示する
-//			Scope();
 			cooltime += Time.deltaTime;
 			if (cooltime >= 0.2f) {
 
@@ -90,8 +93,20 @@ public class GunController : MonoBehaviour {
 			//リロード音を鳴らす
 			audioSource.PlayOneShot(reload,0.5f);
 		}
+
+		if (Input.GetMouseButtonDown (1)) 
+		{	
+			if (isSnipe == false) 
+			{
+				Sniper ();
+			} else {
+				Snipe.SetActive (false);
+				camera.fieldOfView = 60;
+				isSnipe = false;
+			}
+		}
 	}
-		
+	
 	// 銃口に火をつける
 	void Fire(){
 		GameObject fire = Instantiate (sparkle,transform.position,Quaternion.identity);
@@ -112,15 +127,10 @@ public class GunController : MonoBehaviour {
 		shotbullet [1].text = "Bullet : " + bullet + "/30";
 	}
 
-//	//レティクルを表示する
-//	void Scope(){
-//		GameObject scope = Instantiate (reticle,transform.position,Quaternion.identity);
-//		Destroy (scope,1.0f);
-//	}
-
-	//得点が加算される
-//	void Addpoint(){
-//		RaycastHit hit;
-//
-//	}
+	//スナイパーモードにする
+	void Sniper(){
+		Snipe.SetActive (true);
+		camera.fieldOfView = 25;
+		isSnipe = true;
+	}
 }
