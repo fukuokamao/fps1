@@ -10,11 +10,16 @@ public class GunController : MonoBehaviour {
 	public AudioClip reload;
 	AudioSource audioSource;
 	public Text[] shotbullet = new Text[2];
+	public Text[] timer = new Text[1];
+	public Text[] point = new Text[1];
 	int bullet = 30;
 	int bulletbox = 150;
-	public int hitpoint;
+	public int hitpoint = 0;
 	public GameObject headmaker;
 	float cooltime = 0;
+	int sum = 0;
+	public GameObject reticle;
+	float gametime = 20;
 
 	void Start (){
 		audioSource = GetComponent<AudioSource>();
@@ -24,10 +29,19 @@ public class GunController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update (){
+		gametime -= Time.deltaTime;
+		if (gametime > 0.00f) {
+			gametime = Mathf.Floor(gametime * 10)/10;
+			timer [0].text = "Time : " + gametime + "S";
+		}
+
 		if (Input.GetMouseButtonDown (0) && bullet > 0) 
 		{	
-		cooltime += Time.deltaTime;
+			//レティクルを表示する
+//			Scope();
+			cooltime += Time.deltaTime;
 			if (cooltime >= 0.2f) {
+
 				// 銃口に火をつける
 				Fire ();
 
@@ -50,18 +64,18 @@ public class GunController : MonoBehaviour {
 						//EnemyのHPが減る
 						enemyCon.Damage ();
 
+						//得点が加算される
 						float distance = Vector3.Distance (headmaker.transform.position, hit.point);
 
 						if (distance < 0.1f) {
 							hitpoint = 100;
-							print (hitpoint);
 						} else if (distance > 0.7f) {
 							hitpoint = 30;
-							print (hitpoint);
 						} else {
 							hitpoint = 50;
-							print (hitpoint);
 						}
+						sum += hitpoint;
+						point [0].text = "Pt : " + (sum);
 					}
 				}
 				cooltime = 0;
@@ -97,4 +111,16 @@ public class GunController : MonoBehaviour {
 		shotbullet [0].text = "BulletBox : " + bulletbox;
 		shotbullet [1].text = "Bullet : " + bullet + "/30";
 	}
+
+//	//レティクルを表示する
+//	void Scope(){
+//		GameObject scope = Instantiate (reticle,transform.position,Quaternion.identity);
+//		Destroy (scope,1.0f);
+//	}
+
+	//得点が加算される
+//	void Addpoint(){
+//		RaycastHit hit;
+//
+//	}
 }
