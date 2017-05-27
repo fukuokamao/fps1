@@ -10,8 +10,8 @@ public class GunController : MonoBehaviour {
 	public AudioClip reload;
 	AudioSource audioSource;
 	public Text[] shotbullet = new Text[2];
-	public Text[] timer = new Text[1];
-	public Text[] point = new Text[1];
+	public Text timer;
+	public Text point;
 	int bullet = 30;
 	int bulletbox = 150;
 	public int hitpoint = 0;
@@ -32,7 +32,7 @@ public class GunController : MonoBehaviour {
 		gametime -= Time.deltaTime;
 		if (gametime > 0.00f) {
 			gametime = Mathf.Floor(gametime * 10)/10;
-			timer [0].text = "Time : " + gametime + "S";
+			timer.text = "Time : " + gametime + "S";
 		}
 
 		if (Input.GetMouseButtonDown (0) && bullet > 0) 
@@ -75,7 +75,7 @@ public class GunController : MonoBehaviour {
 							hitpoint = 50;
 						}
 						sum += hitpoint;
-						point [0].text = "Pt : " + (sum);
+						point.text = "Pt : " + (sum);
 					}
 				}
 				cooltime = 0;

@@ -5670,13 +5670,11 @@ MonoBehaviour:
   shotbullet:
   - {fileID: 721060640}
   - {fileID: 1703875733}
-  timer:
-  - {fileID: 1776342945}
-  point:
-  - {fileID: 1884676137}
+  timer: {fileID: 1776342945}
+  point: {fileID: 1884676137}
   hitpoint: 0
   headmaker: {fileID: 1519941713}
-  reticle: {fileID: 0}
+  reticle: {fileID: 1319664526}
 --- !u!82 &294656313
 AudioSource:
   m_ObjectHideFlags: 0
